@@ -18,7 +18,6 @@ public class MovieCatalogResource {
 
     @Autowired
     private RestTemplate restTemplate;
-
     @RequestMapping("/{userId}")
     public List<CatalogItem> getCatalog(@PathVariable String userId) {
 
