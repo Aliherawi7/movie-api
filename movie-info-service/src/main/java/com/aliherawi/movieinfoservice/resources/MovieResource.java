@@ -3,6 +3,7 @@ package com.aliherawi.movieinfoservice.resources;
 import com.aliherawi.movieinfoservice.models.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
@@ -29,18 +30,14 @@ public class MovieResource {
 
 
     @RequestMapping("/{movieId}")
-    public Movie getMovieInfo(@PathVariable int movieId) {
+    public ResponseEntity<?> getMovieInfo(@PathVariable int movieId) {
         return movieService.getMovie(movieId);
         //return new Movie(1, "spider 1", "....");
     }
 
     @RequestMapping("/allMovies")
     public List<Movie> getAllMovies(){
-       //return movieService.getAllMovies();
-        return Arrays.asList(
-                new Movie(1, "spider 1", "...."),
-                new Movie(2, "spider 2", "....")
-        );
+       return movieService.getAllMovies();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/movie")
@@ -56,6 +53,10 @@ public class MovieResource {
     @RequestMapping(method = RequestMethod.DELETE, value = "/{movieId}")
     public void deleteMovie(@PathVariable int movieId){
         movieService.deleteMovie(movieId);
+    }
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void deleteAllMovies(){
+        movieService.deleteAllMovies();
     }
 
 }
