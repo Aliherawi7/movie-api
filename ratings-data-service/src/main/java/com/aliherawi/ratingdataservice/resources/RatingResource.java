@@ -14,15 +14,15 @@ import java.util.List;
 public class RatingResource {
 
     @RequestMapping("/{movieId}")
-    public Rating getMovie(@PathVariable String movieId) {
+    public Rating getMovie(@PathVariable int movieId) {
         return new Rating(movieId, 4);
     }
 
     @RequestMapping("users/{userId}")
     public UserRating getRating() {
         List<Rating> ratings = Arrays.asList(
-                new Rating("spiderman", 4),
-                new Rating("Money heist", 5)
+                new Rating(1, 4),
+                new Rating(2, 5)
         );
         UserRating userRating = new UserRating();
         userRating.setUserRating(ratings);

@@ -1,22 +1,33 @@
 package com.aliherawi.movieinfoservice.models;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+import javax.persistence.*;
+
+@Entity
+@Table
 public class Movie {
-    private String movieId;
+    @Id
+    private int movieId;
     private String name;
     private String description;
 
-    public Movie(String movieId, String name, String description) {
+    public Movie(){
+
+    }
+
+    public Movie(int movieId, String name, String description) {
         super();
         this.movieId = movieId;
         this.name = name;
         this.description = description;
     }
 
-    public String getMovieId() {
+    public int getMovieId() {
         return movieId;
     }
 
-    public void setMovieId(String movieId) {
+    public void setMovieId(int movieId) {
         this.movieId = movieId;
     }
 
