@@ -32,10 +32,9 @@ public class MovieResource {
     @RequestMapping("/{movieId}")
     public ResponseEntity<?> getMovieInfo(@PathVariable int movieId) {
         return movieService.getMovie(movieId);
-        //return new Movie(1, "spider 1", "....");
     }
 
-    @RequestMapping("/allMovies")
+    @GetMapping
     public List<Movie> getAllMovies(){
        return movieService.getAllMovies();
     }
