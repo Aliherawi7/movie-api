@@ -1,17 +1,31 @@
 package com.aliherawi.ratingdataservice.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Rating {
+    @Id
+    private int ratingId;
     private int movieId;
     private int rating;
+    private String userId;
 
     public Rating() {
     }
 
-    public Rating(int movieId, int rating) {
+    public Rating(int ratingId, int movieId, int rating, String userId) {
+        this.ratingId = ratingId;
         this.movieId = movieId;
         this.rating = rating;
+        this.userId = userId;
     }
-
+    public int getRatingId(){
+        return ratingId;
+    }
+    public void setRatingId(int ratingId){
+        this.ratingId = ratingId;
+    }
     public int getMovieId() {
         return movieId;
     }
@@ -26,6 +40,13 @@ public class Rating {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public String getUserId(){
+        return  userId;
+    }
+    public void setUserId(String userId){
+        this.userId = userId;
     }
 
 
