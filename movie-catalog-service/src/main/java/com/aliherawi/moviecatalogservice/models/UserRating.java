@@ -14,6 +14,9 @@ public class UserRating {
     public void setUserRating(List<Rating> userRating) {
         this.userRating = userRating;
     }
+    public int getSize(){
+        return this.userRating.size();
+    }
 
 
 }
