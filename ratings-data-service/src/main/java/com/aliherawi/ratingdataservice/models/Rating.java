@@ -1,19 +1,23 @@
 package com.aliherawi.ratingdataservice.models;
 
+import org.springframework.cglib.reflect.FastClass;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Rating {
     @Id
+    @GeneratedValue
     private int ratingId;
     private int movieId;
     private int rating;
     private String userId;
 
     public Rating() {
-    }
 
+    }
     public Rating(int ratingId, int movieId, int rating, String userId) {
         this.ratingId = ratingId;
         this.movieId = movieId;
