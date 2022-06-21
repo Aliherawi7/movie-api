@@ -5,6 +5,8 @@ import com.aliherawi.moviecatalogservice.models.Movie;
 import com.aliherawi.moviecatalogservice.models.Rating;
 import com.aliherawi.moviecatalogservice.models.UserRating;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,11 +21,11 @@ public class MovieCatalogResource {
 
     @Autowired
     private RestTemplate restTemplate;
+
     @RequestMapping("/{userId}")
-    public List<CatalogItem> getCatalog(@PathVariable String userId) {
+    public ResponseEntity<?> getCatalog(@PathVariable String userId) {
         UserRating ratings = restTemplate.getForObject("http://rating-data-service/ratingdata/" + userId, UserRating.class);
-        return ratings.getUserRating().stream().map(rating -> {
-            System.out.println(rating.getMovieId());
+        List<CatalogItem> catalogItems = ratings.getUserRating().stream().map(rating -> {
             //for each movie ID call movie info service and get the movie details
             Movie movie = restTemplate.getForObject("http://movie-info-service/movies/" + rating.getMovieId(), Movie.class);
 
@@ -32,6 +34,11 @@ public class MovieCatalogResource {
 
         })
                 .collect(Collectors.toList());
+        if(catalogItems.size()>0){
+            return new ResponseEntity<List<CatalogItem>>(catalogItems, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("Not Found!", HttpStatus.NOT_FOUND);
+        }
     }
 
 }
