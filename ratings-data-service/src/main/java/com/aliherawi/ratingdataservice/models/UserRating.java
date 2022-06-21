@@ -10,9 +10,11 @@ public class UserRating {
     public List<Rating> getUserRating() {
         return userRating;
     }
-
     public void setUserRating(List<Rating> userRating) {
         this.userRating = userRating;
+    }
+    public int getSize(){
+        return this.userRating.size();
     }
 
 
